@@ -407,83 +407,67 @@ function endGame() {
 }
 // ================= ROOM OF REFLECTION =================
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const room = document.getElementById("room-of-reflection");
-  const questions = Array.from(document.querySelectorAll(".question"));
+  const questions = document.querySelectorAll(".question");
   const resultBox = document.getElementById("reflection-result");
-  const resultText = resultBox.querySelector(".result-text");
+  const resultText = document.querySelector(".result-text");
   const exitBtn = document.getElementById("exit-room");
 
-  let chosenTraits = [];
+  let traits = [];
 
-  // Show the room
-  room.classList.remove("hidden");
+  /* SHOW ROOM */
+  function openReflectionRoom() {
+    room.classList.remove("hidden");
+    setTimeout(() => room.classList.add("visible"), 100);
+  }
 
-  // Handle button clicks
+  /* QUESTION FLOW */
   questions.forEach((q, index) => {
-    const buttons = Array.from(q.querySelectorAll("button"));
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        if(btn.dataset.trait) chosenTraits.push(btn.dataset.trait);
+    q.addEventListener("click", e => {
+      if (!e.target.dataset.trait) return;
 
-        q.classList.add("hidden");
+      traits.push(e.target.dataset.trait);
+      q.classList.add("hidden");
 
-        if(questions[index + 1]) {
-          questions[index + 1].classList.remove("hidden");
-        } else {
-          revealReflection();
-        }
-      });
+      if (questions[index + 1]) {
+        questions[index + 1].classList.remove("hidden");
+      } else {
+        revealResult();
+      }
     });
   });
 
-  function revealReflection() {
-    const reflectionMessages = [
-      "You carry quiet strength, even when unseen.",
-      "Doubt follows you, but it does not define you.",
-      "Your heart is honest, though shadows linger.",
-      "You survive by adapting, not by fighting.",
-      "You see deeply, even when you pretend not to."
+  /* RESULT */
+  function revealResult() {
+    const messages = [
+      "You carry strength quietly — and it lasts.",
+      "You feel deeply, even when you hide it.",
+      "Your magic is patience, not force.",
+      "You survive by understanding, not fighting.",
+      "You are braver than you admit."
     ];
 
-    const randIndex = Math.floor(Math.random() * reflectionMessages.length);
-    const message = reflectionMessages[randIndex];
+    resultText.textContent =
+      messages[Math.floor(Math.random() * messages.length)];
 
     resultBox.classList.remove("hidden");
-    typeText(resultText, message, 0);
   }
 
-  function typeText(element, text, i) {
-    if(i < text.length) {
-      element.textContent += text.charAt(i);
-      setTimeout(() => typeText(element, text, i + 1), 50);
-    }
-  }
-
+  /* EXIT */
   exitBtn.addEventListener("click", () => {
-    room.classList.add("hidden");
-    questions.forEach(q => q.classList.add("hidden"));
-    questions[0].classList.remove("hidden");
-    resultText.textContent = "";
-    chosenTraits = [];
-    resultBox.classList.add("hidden");
+    room.classList.remove("visible");
+    setTimeout(() => room.classList.add("hidden"), 2000);
   });
 
-});
-const room = document.getElementById("room-of-reflection");
-const hogwartsInfo = document.querySelector(".hogwarts-info"); // the section before room
+  /* AUTO OPEN (remove later) */
+  openReflectionRoom();
 
-window.addEventListener("scroll", () => {
-  const scrollPosition = window.scrollY + window.innerHeight;
-  const triggerPosition = hogwartsInfo.offsetTop + hogwartsInfo.offsetHeight;
-
-  if(scrollPosition >= triggerPosition) {
-    room.classList.add("visible");
-  } else {
-    room.classList.remove("visible");
-  }
 });
+
+
 
 // ================= POTION BREWING =================
 

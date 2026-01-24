@@ -797,109 +797,105 @@ header .house-crest img:hover {
 
 
 /* ===== ROOM OF REFLECTION ===== */
-#room-of-reflection {
-  position: relative;
-  min-height: 100vh;
-  background: radial-gradient(circle at center, rgba(20,20,30,0.95), rgba(0,0,0,0.95));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transform: translateY(50px);
-  pointer-events: none;
-  transition: opacity 2s ease, transform 2s ease;
-  z-index: 999;
+.hidden {
+  display: none;
 }
 
+/* FULL ROOM — NOT A CARD */
+#room-of-reflection {
+  min-height: 100vh;
+  padding: 6rem 2rem;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(20,20,30,0.95),
+    rgba(0,0,0,0.95)
+  );
+
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 2s ease, transform 2s ease;
+}
+
+/* Visible state */
 #room-of-reflection.visible {
   opacity: 1;
   transform: translateY(0);
-  pointer-events: auto;
 }
 
-/* Mirror frame */
+/* MIRROR CARD */
 .mirror-frame {
-  background: rgba(30,30,50,0.85);
+  max-width: 720px;
+  margin: 0 auto;
+
   padding: 3rem 2rem;
-  border: 2px solid rgba(200,200,255,0.4);
-  border-radius: 20px;
-  box-shadow: 0 0 50px rgba(180,140,255,0.5);
-  text-align: center;
-  max-width: 700px;
+  border-radius: 22px;
+
+  background: rgba(30,30,50,0.85);
+  border: 2px solid rgba(200,200,255,0.35);
+
+  box-shadow:
+    0 0 60px rgba(180,140,255,0.45),
+    inset 0 0 40px rgba(180,140,255,0.2);
+
   backdrop-filter: blur(6px);
-  animation: shimmer 4s infinite alternate;
+  text-align: center;
 }
 
 .mirror-frame h2 {
   font-family: 'Cinzel', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  color: #e0e0ff;
+  color: #e8e8ff;
   text-shadow: 0 0 20px rgba(180,140,255,0.6);
+}
+
+.mirror-text {
+  margin: 1.5rem 0 2.5rem;
+  color: #ccc;
+  text-shadow: 0 0 15px rgba(120,120,255,0.4);
+}
+
+.question {
+  margin-bottom: 2rem;
+}
+
+.question p {
   margin-bottom: 1rem;
 }
 
-.mirror-frame p.mirror-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  color: #ccc;
-  margin-bottom: 2rem;
-  text-shadow: 0 0 15px rgba(100,100,255,0.4);
-}
+.question button {
+  margin: 0.4rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 20px;
 
-.mirror-frame .question {
-  margin-bottom: 2rem;
-}
-
-.mirror-frame .question button {
-  margin: 0.5rem;
-  padding: 0.7rem 1.5rem;
-  font-family: 'Cinzel', serif;
-  font-size: 1rem;
-  color: #fff;
   background: rgba(100,100,200,0.3);
   border: 1px solid rgba(180,140,255,0.5);
-  border-radius: 20px;
+  color: #fff;
+
   cursor: pointer;
   transition: all 0.4s ease;
-  box-shadow: 0 0 15px rgba(180,140,255,0.3);
 }
 
-.mirror-frame .question button:hover {
-  background: rgba(180,140,255,0.25);
-  box-shadow: 0 0 35px rgba(180,140,255,0.6);
+.question button:hover {
   transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 30px rgba(180,140,255,0.6);
 }
 
-/* Result box */
+/* RESULT */
 #reflection-result {
   margin-top: 2rem;
 }
 
-#reflection-result .result-text {
+.result-text {
   font-size: 1.1rem;
-  color: #e0e0ff;
-  text-shadow: 0 0 15px rgba(180,140,255,0.5);
   margin-bottom: 1.5rem;
 }
 
-/* Shimmer animation */
+/* SHIMMER */
 @keyframes shimmer {
-  0% { box-shadow: 0 0 30px rgba(180,140,255,0.3), inset 0 0 20px rgba(180,140,255,0.2);}
-  50% { box-shadow: 0 0 60px rgba(180,140,255,0.5), inset 0 0 40px rgba(180,140,255,0.3);}
-  100% { box-shadow: 0 0 30px rgba(180,140,255,0.3), inset 0 0 20px rgba(180,140,255,0.2);}
-}
-#room-of-reflection {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1.5s ease, transform 1.5s ease;
-  pointer-events: none; /* prevents accidental clicks while hidden */
+  0% { box-shadow: 0 0 40px rgba(180,140,255,0.3); }
+  100% { box-shadow: 0 0 70px rgba(180,140,255,0.6); }
 }
 
-#room-of-reflection.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
 /* ================= POTION BREWING ================= */
 #potion-brewing {
   text-align: center;

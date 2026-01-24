@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hogwarts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HOGWARTS INTRO SCREEN -->
+  <div id="hogwarts-intro">
+    <div class="intro-content">
+      <p>Established over a thousand years ago…</p>
+      <h1>Hogwarts School of Witchcraft and Wizardry</h1>
+      
+      <button id="enter-hogwarts">Platform 9¾</button>
+      <div class="intro-images">
+        <div class="fog"></div>
+        <img src="pngaaa.com-1767348.png" alt="Hogwarts Express" class="train">
+      </div>
+    </div>
+  </div>
+
+  
+ <!-- SORTING HAT -->
+<section id="sorting-hat">
+  <h2>Hogwarts Sorting Hat</h2>
+  <p>Enter your name and see which house you belong to:</p>
+
+  <input type="text" id="student-name" placeholder="Your Name">
+  <button id="sort-button">Sort Me!</button>
+
+  <div id="sorting-result">
+    <h3 id="house-name"></h3>
+    <img id="house-crest" src="" alt="">
+    <p id="house-desc"></p>
+  </div>
+</section>
+<!-- SWEETS: Bertie Bott -->
+<section class="sweets">
+  <h2>Bertie Bott’s Every Flavour Beans</h2>
+  <div class="bean-container">
+    <img src="pngaaa.com-1020501.png" alt="Bean" id="bean">
+    <p id="bean-flavour">Hover to taste your fate…</p>
+  </div>
+</section>
+
+<!-- SWEETS: Chocolate Frog -->
+<section class="sweets">
+  <h2>Chocolate Frog</h2>
+  <div class="frog-container">
+  <img src="pngaaa.com-2475666.png" id="frog" alt="Chocolate Frog">
+  <div class="frog-card" id="frog-card"></div> <!-- Empty by default -->
+</div>
+
+</section>
+<!-- Sparkle container -->
+<div id="sparkle-container"></div>
+<!-- MAIN SITE CONTENT -->
+<div id="site-content">
+
+  <!-- Floating Dust -->
+  <div class="dust" id="dust"></div>
+
+  <!-- Wand Cursor -->
+  <div class="wand" id="wand"></div>
+  
+<!-- WHICH CHARACTER ARE YOU -->
+<section id="character-quiz">
+  <h2>Which Wizard Are You?</h2>
+  <p class="quiz-subtitle">
+    Answer honestly. The magic listens.
+  </p>
+
+  <div class="question" data-question="1">
+    <p>When faced with danger, you usually…</p>
+    <button data-score="gryffindor">Face it head-on</button>
+    <button data-score="slytherin">Plan your advantage</button>
+    <button data-score="ravenclaw">Think it through</button>
+    <button data-score="hufflepuff">Protect others first</button>
+  </div>
+
+  <div class="question hidden" data-question="2">
+    <p>Your greatest strength is…</p>
+    <button data-score="gryffindor">Courage</button>
+    <button data-score="slytherin">Ambition</button>
+    <button data-score="ravenclaw">Intelligence</button>
+    <button data-score="hufflepuff">Loyalty</button>
+  </div>
+
+  <div class="question hidden" data-question="3">
+    <p>You value most…</p>
+    <button data-score="gryffindor">Doing what’s right</button>
+    <button data-score="slytherin">Winning</button>
+    <button data-score="ravenclaw">Understanding</button>
+    <button data-score="hufflepuff">Belonging</button>
+  </div>
+<div class="question hidden" data-question="4">
+  <p>People often describe you as…</p>
+  <button data-trait="brave">Fearless</button>
+  <button data-trait="clever">Smart</button>
+  <button data-trait="gentle">Kind</button>
+  <button data-trait="ambitious">Driven</button>
+  <button data-trait="chaotic">Unpredictable</button>
+</div>
+
+  <div id="character-result" class="hidden">
+    <h3 id="character-name"></h3>
+    <p id="character-desc"></p>
+  </div>
+</section>
+ <section id="forest">
+
+  <div class="fog"></div>
+
+  <!-- ENTRY -->
+  <div class="scene active" id="entry">
+    <h1>The Forbidden Forest</h1>
+    <p class="whisper">
+      The trees have stood longer than Hogwarts itself.  
+      Not all who enter return.
+    </p>
+
+    <p class="question">Are you brave enough to enter?</p>
+
+    <div class="choices">
+      <button onclick="enterForest()">Enter the Forest</button>
+      <button onclick="turnBack()">Turn Back</button>
+    </div>
+  </div>
+
+  <!-- CHALLENGE 1 -->
+  <div class="scene" id="challenge1">
+    <p class="whisper">
+      The trees begin to whisper your fears by name.
+    </p>
+
+    <div class="choices">
+      <button onclick="choose(2)">Listen closely</button>
+      <button onclick="choose(1)">Walk faster</button>
+      <button onclick="choose(-1)">Cast a calming charm</button>
+    </div>
+  </div>
+
+  <!-- CHALLENGE 2 -->
+  <div class="scene" id="challenge2">
+    <p class="whisper">
+      A distant howl echoes through the fog.
+    </p>
+
+    <div class="choices">
+      <button onclick="choose(2)">Run</button>
+      <button onclick="choose(0)">Hide silently</button>
+      <button onclick="choose(-1)">Stand your ground</button>
+    </div>
+  </div>
+
+  <!-- CHALLENGE 3 -->
+  <div class="scene" id="challenge3">
+    <p class="whisper">
+      Something sticky brushes your arm in the dark.
+    </p>
+
+    <div class="choices">
+      <button onclick="choose(2)">Panic</button>
+      <button onclick="choose(1)">Tear free</button>
+      <button onclick="choose(-1)">Burn the web</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="scene" id="result">
+    <h2 id="result-title"></h2>
+    <p id="result-text"></p>
+    <button onclick="location.reload()">good luck</button>
+  </div>
+
+</section>
+
+  <!-- Header -->
+  <header>
+    <div class="intro">
+      <h1>The Wizarding World</h1>
+      <p>
+        Magic isn’t in spells. It lives in choices, courage,
+        and the stories we leave behind.
+      </p>
+    </div>
+
+    <div class="dobby">
+      <img src="pngaaa.com-1073533 (1).png" alt="Dobby">
+    </div>
+
+    <div class="owl">
+      <img src="pngaaa.com-619703.png" alt="Owl">
+    </div>
+
+    <div class="house-crest">
+      <img src="pngaaa.com-1767375.png" alt="House Crest">
+    </div>
+  </header>
+
+</div>
+  <!-- Hogwarts Info Cards -->
+<section class="hogwarts-info">
+  <h2>Welcome to Hogwarts</h2>
+  <div class="info-cards">
+    <div class="info-card">
+      <img src="castle-of-hogwarts.jpg" alt="Hogwarts Castle">
+      <h3>The Castle</h3>
+      <p>Perched atop the cliffs, Hogwarts is the heart of wizarding learning and adventure.</p>
+    </div>
+    <div class="info-card">
+      <img src="library.jpg" alt="Library">
+      <h3>Magical Locations</h3>
+      <p>From the Great Hall to the Forbidden Forest, every corner holds a story.</p>
+    </div>
+    <div class="info-card">
+      <img src="sorting hat.jpg" alt="Sorting Hat">
+      <h3>The Houses</h3>
+      <p>Gryffindor, Slytherin, Ravenclaw, and Hufflepuff — where will your loyalty lie?</p>
+  </div>
+  <div class ="info-card">
+      <img src="quiddtich.webp" alt="Quidditch">
+      <h3>Quidditch</h3>
+      <p>The thrilling sport that unites witches and wizards in fierce competition.</p>
+    </div>
+
+</section>
+<!-- ROOM OF REFLECTION -->
+<section id="room-of-reflection" class="hidden">
+  <div class="mirror-frame">
+    <h2>Room of Reflection</h2>
+    <p class="mirror-text">The mirror waits… answer honestly.</p>
+
+    <div class="question" data-trait="courage">
+      <p>Do you face your fears alone or seek guidance?</p>
+      <button data-trait="brave">Alone, head-on</button>
+      <button data-trait="wise">Seek guidance</button>
+    </div>
+
+    <div class="question hidden" data-trait="compassion">
+      <p>When someone is lost, do you help them or let them find their way?</p>
+      <button data-trait="kind">Help them</button>
+      <button data-trait="practical">Let them find out</button>
+    </div>
+
+    <div class="question hidden" data-trait="resilience">
+      <p>When challenged, do you fight or reflect?</p>
+      <button data-trait="bold">Fight</button>
+      <button data-trait="calm">Reflect</button>
+    </div>
+
+    <div class="question hidden" data-trait="curiosity">
+      <p>Do you explore the unknown or stay in comfort?</p>
+      <button data-trait="adventurous">Explore</button>
+      <button data-trait="cautious">Stay safe</button>
+    </div>
+
+    <div class="question hidden" data-trait="honesty">
+      <p>Would you reveal a secret to save someone?</p>
+      <button data-trait="truthful">Yes</button>
+      <button data-trait="reserved">No</button>
+    </div>
+
+    <div id="reflection-result" class="hidden">
+      <h3>Your Reflection Says:</h3>
+      <p class="result-text"></p>
+      <button id="exit-room">Leave the Room</button>
+    </div>
+  </div>
+</section>
+<section id="potion-brewing">
+  <h1>Potion Brewing Lab</h1>
+  <p>Pick 3 ingredients and see what magical potion you create!</p>
+
+  <div class="ingredients">
+    <div class="ingredient" data-name="Eye of Newt" data-color="#7a5fff">Eye of Newt</div>
+    <div class="ingredient" data-name="Unicorn Hair" data-color="#ff7aff">Unicorn Hair</div>
+    <div class="ingredient" data-name="Dragon Scale" data-color="#ff5f5f">Dragon Scale</div>
+    <div class="ingredient" data-name="Phoenix Feather" data-color="#ffdf5f">Phoenix Feather</div>
+    <div class="ingredient" data-name="Mandrake Root" data-color="#5fff7a">Mandrake Root</div>
+    <div class="ingredient" data-name="Moonstone Dust" data-color="#5fdfff">Moonstone Dust</div>
+  </div>
+
+  <div class="cauldron-container">
+    <div class="cauldron">
+      <div class="potion"></div>
+      <img src="pngaaa.com-703448.png" alt="Cauldron">
+      <div class="bubbles"></div>
+    </div>
+  </div>
+
+  <button id="brew-btn">Brew Potion</button>
+
+  <div id="potion-result" class="hidden">
+    <h2>Your Potion Effect:</h2>
+    <p id="potion-text"></p>
+  </div>
+</section>
+
+
+  <!-- House Cards -->
+  <section>
+    <h1>Hogwarts Houses</h1>
+    <div class="houses">
+      <div class="house-card gryffindor" data-house="gryffindor">
+        <h3>Gryffindor</h3>
+        <span>Head: Minerva McGonagall</span>
+        <p>Where courage is chosen, not inherited.</p>
+      </div>
+      <div class="house-card slytherin" data-house="slytherin">
+        <h3>Slytherin</h3>
+        <span>Head: Severus Snape</span>
+        <p>Ambition sharpened into survival.</p>
+      </div>
+      <div class="house-card ravenclaw" data-house="ravenclaw">
+        <h3>Ravenclaw</h3>
+        <span>Head: Filius Flitwick</span>
+        <p>Wit, wisdom, and quiet power.</p>
+      </div>
+      <div class="house-card hufflepuff" data-house="hufflepuff">
+        <h3>Hufflepuff</h3>
+        <span>Head: Pomona Sprout</span>
+        <p>Loyalty that never asks for applause.</p>
+      </div>
+    </div>
+  </section>
+  <section id="hogwarts-guardians">
+  <div class="guardian-overlay"></div>
+
+  <div class="guardian-content">
+    <h1>The Guardians of Hogwarts</h1>
+    <p class="intro-line">
+      Before spells were taught, before halls were named,  
+      magic chose its protectors.
+    </p>
+
+    <div class="guardians-list">
+      <div class="guardian">
+        <h2>The Castle Itself</h2>
+        <p>
+          Hogwarts is not stone and stair alone.  
+          It listens. It remembers.  
+          It moves to protect those who belong.
+        </p>
+      </div>
+
+      <div class="guardian">
+        <h2>The Founders’ Magic</h2>
+        <p>
+          Four minds. Four values.  
+          Their magic lingers in every corridor,  
+          judging intent, not blood.
+        </p>
+      </div>
+
+      <div class="guardian">
+        <h2>The Ancient Enchantments</h2>
+        <p>
+          Spells layered over centuries —  
+          wards against darkness, betrayal, and despair.  
+          Not all threats can pass unseen.
+        </p>
+      </div>
+
+      <div class="guardian">
+        <h2>The Living Will</h2>
+        <p>
+          Hogwarts protects those who choose courage,  
+          kindness, curiosity, or loyalty —  
+          even when they falter.
+        </p>
+      </div>
+    </div>
+
+    <p class="closing-line">
+      Hogwarts does not need a single guardian.  
+      It is guarded by belief.
+    </p>
+  </div>
+  <div class="magic-dust" style="left:10%; animation-delay:0s;"></div>
+<div class="magic-dust" style="left:30%; animation-delay:3s;"></div>
+<div class="magic-dust" style="left:50%; animation-delay:6s;"></div>
+<div class="magic-dust" style="left:70%; animation-delay:9s;"></div>
+<div class="magic-dust" style="left:90%; animation-delay:12s;"></div>
+
+</section>
+
+
+  <!-- Characters Grid -->
+   
+  <section class="characters">
+    <h1>Famous Wizards & Witches</h1>
+    <div class="house-filters">
+  <button class="house-filter-btn" data-house="all">All Houses</button>
+  <button class="house-filter-btn" data-house="gryffindor">Gryffindor</button>
+  <button class="house-filter-btn" data-house="slytherin">Slytherin</button>
+  <button class="house-filter-btn" data-house="ravenclaw">Ravenclaw</button>
+  <button class="house-filter-btn" data-house="hufflepuff">Hufflepuff</button>
+</div>
+
+    <div class="character-card gryffindor" data-house="gryffindor">
+      <img src="harrypotter.jpg" alt="Harry Potter">
+      <h4>Harry Potter</h4>
+      <span>The Boy Who Lived — because he chose to.</span>
+    </div>
+    <div class="character-card gryffindor" data-house="gryffindor">
+      <img src="hermonie.webp" alt="Hermione Granger">
+      <h4>Hermione Granger</h4>
+      <span>Brilliance that refused to stay silent.</span>
+    </div>
+    <div class="character-card gryffindor" data-house="gryffindor">
+    <img src="ron.webp" alt="Ron Weasley">
+    <h4>Ron Weasley</h4>
+    <span>Bravery that trembled — and still stayed.</span>
+  </div>
+    <div class="character-card slytherin" data-house="slytherin">
+    <img src="snape.webp" alt="Severus Snape">
+    <h4>Severus Snape</h4>
+    <span>Love, misunderstood — and paid in full.</span>
+  </div>
+    <div class="character-card slytherin" data-house="slytherin">
+      <img src="draco.jpg" alt="Draco Malfoy">
+      <h4>Draco Malfoy</h4>
+      <span>Raised on expectations, not choices.</span>
+    </div>
+    <div class="character-card ravenclaw" data-house="ravenclaw">
+      <img src="luna.webp" alt="Luna Lovegood">
+      <h4>Luna Lovegood</h4>
+      <span>She saw truth where others saw nonsense.</span>
+    </div>
+      <div class="character-card ravenclaw" data-house="ravenclaw">
+    <img src="filius.webp" alt="Filius Flitwick">
+    <h4>Filius Flitwick</h4>
+    <span>Small in size, giant in knowledge.</span>
+  </div>
+     <div class="character-card hufflepuff" data-house="hufflepuff">
+    <img src="Nymphadora.webp" alt="Nymphadora Tonks">
+    <h4>Nymphadora Tonks</h4>
+    <span>Bravery colored with whimsy and charm.</span>
+  </div>
+    <div class="character-card hufflepuff" data-house="hufflepuff">
+      <img src="cedric.jpg" alt="Cedric Diggory">
+      <h4>Cedric Diggory</h4>
+      <span>Fairness and valor in equal measure.</span>
+    </div>
+  </section>
+
+  <!-- Storybook Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" id="close">&times;</span>
+      <h2 id="modalTitle">Title</h2>
+      <p id="modalText">Story goes here...</p>
+    </div>
+  </div>
+
+
+ <!-- DOBBY EASTER EGG -->
+<!-- ================= DOBBY EASTER EGG (BOTTOM) ================= -->
+<section id="dobby-section">
+  <div id="dobby-container">
+    <img src="pngaaa.com-1073532.png" id="dobby" alt="Dobby the House-Elf">
+    <p id="dobby-text">Dobby is free.</p>
+  </div>
+  
+  
+</section>
+<!-- Logout Button -->
+<button id="logout-btn">Leave Hogwarts</button>
+
+<!-- Closing Gates -->
+<div id="logout-overlay">
+  <div class="gate left"></div>
+  <div class="gate right"></div>
+  <p class="farewell">Your story will continue.</p>
+</div>
+
+
+  <footer>✨ Mischief Managed ✨</footer>
+</div>
+<audio id="hogwarts-sound" src="hogwarts-bell.mp3"></audio>
+<audio id="train-sound" src="train.mp3"></audio>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
+

@@ -539,5 +539,49 @@ brewBtn.addEventListener("click", () => {
   potionDiv.style.background = "#555";
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const drawCard = document.getElementById("draw-card");
+  const resultBox = document.getElementById("spell-result");
+  const spellTitle = document.getElementById("drawn-spell");
+  const spellDesc = document.getElementById("drawn-desc");
 
+  const spellDeck = [
+    { name: "Lumos", desc: "Light awakens where darkness lingers." },
+    { name: "Nox", desc: "The world returns to shadow and silence." },
+    { name: "Accio", desc: "What is meant for you finds its way." },
+    { name: "Incendio", desc: "Fire answers your will." },
+    { name: "Wingardium Leviosa", desc: "Weight becomes memory." },
+    { name: "Protego", desc: "Invisible strength surrounds you." },
+    { name: "Expelliarmus", desc: "Power without cruelty." },
+    { name: "Expecto Patronum", desc: "Hope takes shape." },
+    { name: "Alohomora", desc: "Closed paths open quietly." },
+    { name: "Obliviate", desc: "Some memories fade for mercy." }
+  ];
 
+  let cardDrawn = false;
+
+  drawCard.addEventListener("click", () => {
+    if (cardDrawn) return; // prevent multiple clicks
+    cardDrawn = true;
+
+    // sparkle effect
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.style.left = `${Math.random() * 180}px`;
+    sparkle.style.top = `${Math.random() * 260}px`;
+    drawCard.appendChild(sparkle);
+    setTimeout(() => drawCard.removeChild(sparkle), 800);
+
+    // random spell
+    const randomSpell = spellDeck[Math.floor(Math.random() * spellDeck.length)];
+
+    // animation
+    drawCard.classList.add("reveal");
+
+    setTimeout(() => {
+      spellTitle.textContent = randomSpell.name;
+      spellDesc.textContent = randomSpell.desc;
+      resultBox.classList.remove("hidden");
+    }, 600);
+  });
+});
